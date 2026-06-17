@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+    <title>AHAHAHA.com</title>
+    <style>
+        body {
+            background-color: rgb(23, 24, 33);
+        }
+        .setup {
+            color: aliceblue;
+            background-color: rgb(56, 55, 85);
+            display: flex;
+            position: absolute;
+            width: 40vh;
+            height: 20vh;
+            border-radius: 2vh;
+            align-items: center;
+            font-size: 4vh;
+            margin-left: 20vh;
+            margin-top: 10vh;
+            padding: 30px;
+            transition: 500ms;
+        }
+        .punchline {
+            color: aliceblue;
+            background-color: rgb(56, 55, 85);
+            display: flex;
+            position: absolute;
+            width: 40vh;
+            height: 20vh;
+            border-radius: 2vh;
+            align-items: center;
+            font-size: 4vh;
+            margin-left: 50vh;
+            margin-top: 40vh;
+            padding: 30px;
+            transition: 500ms;
+        }
+        .setup:hover {
+            margin-top: 9vh;
+        }
+        .punchline:hover {
+            margin-top: 39vh;
+        }
+        .next {
+            display: flex;
+            position: absolute;
+            margin-left: 68vh;
+            margin-top: 33vh;
+            border: none;
+            border-radius: 1vh;
+            width: 10vh;
+            height: 5vh;
+            background-color: aquamarine;
+            align-items: center;
+            transition: 500ms;
+        }
+        .next:hover {
+            background-color: rgb(99, 198, 181);
+            margin-top: 32vh;
+        }
+        .next:active {
+            background-color: rgb(68, 137, 125);
+            margin-top: 30vh;
+        }
+        .RightFooter {
+            color: aliceblue;
+            margin-left: 70%;
+            width: 40vh;
+            position: fixed; /* Фиксируем, чтобы не сдвигал контент */
+            top: 0; /* Прижимаем к верху */
+            z-index: 1; /* Чтобы был поверх */
+            background-color: rgb(23, 24, 33); /* Фон чтобы не просвечивало */
+            padding: 10px 0;
+        }
+
+        /* ВЕРТИКАЛЬНАЯ ЛИНИЯ СЛЕВА */
+        .RightFooter::before {
+            content: "";
+            position: absolute;
+            left: -15px;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background-color: rgb(71, 74, 101);
+            display: block;
+        }
+
+        /* Убираем точку снизу, если она ещё есть */
+        .RightFooter::after {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+	<div class="RightFooter">
+		<h1>Site with stuped jokes</h1>
+        <h4>There are tons of jokes in the question-and-answer section.</h4>
+        <h6>Created by Flnnd13</h6>
+	</div>
+    <div class="joke-card">
+        <div class="setup" id="setup"><p>One second...</p></div>
+        <p class="punchline" id="punchline"></p>
+        <button class="next" onclick="getJoke()">Next joke -></button>
+    </div>
+</body>
+<script>
+    function getJoke() {
+            const setupElement = document.getElementById('setup');
+            const punchlineElement = document.getElementById('punchline');
+
+            // Делаем запрос к API шуток
+            fetch('http://www.official-joke-api.appspot.com/random_joke')
+                .then(response => response.json())
+                .then(data => {
+                    setupElement.innerText = data.setup;
+                    punchlineElement.innerText = data.punchline;
+                })
+                .catch(error => {
+                    setupElement.innerText = "oh... Sorry, but this service not anvible now";
+                    console.error('Error:', error);
+                });
+        }
+
+        // Запускаем функцию один раз при загрузке страницы
+        getJoke();
+</script>
