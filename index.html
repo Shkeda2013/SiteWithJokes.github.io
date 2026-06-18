@@ -109,7 +109,7 @@
             const punchlineElement = document.getElementById('punchline');
 
             // Делаем запрос к API шуток
-            fetch('https://www.official-joke-api.appspot.com/random_joke')
+            fetch('https://official-joke-api.appspot.com/random_joke')
                 .then(response => response.json())
                 .then(data => {
                     setupElement.innerText = data.setup;
